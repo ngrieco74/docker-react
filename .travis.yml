@@ -7,3 +7,19 @@ before_install:
     
 script:
     - docker run -e CI=true ngrieco/docker-react npm run test -- --coverage
+    
+deploy:
+    provider: elasticbeanstalk
+    region: "us-west-2"
+    app: "docker-react"
+    env: "Docker-env"
+    #name and path of the space area on the cloud
+    bucker_name: ""
+    bucket_path: "docker-react"
+    on:
+        branch: master
+    #to be configured in Travis CI settings    
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: 
+        secure: "$AWS_SECRET_KEY"
+    
